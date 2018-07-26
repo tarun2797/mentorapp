@@ -1,0 +1,97 @@
+from django.shortcuts import render
+
+# Create your views here.
+
+from django.http import HttpResponse
+
+from django.template import loader
+
+from onlineapp.models import *
+
+def hello(request):
+    message = "<html><body><h1>hello tarun2797</h1></body></html>"
+    return HttpResponse(message)
+
+def college_details(request):
+    details = college.objects.values_list("name","acronym")
+
+    html_var = "<html><style>table, th, td { border: 1px solid black;border-collapse: collapse;}</style><body><table>"
+    for row in list(details):
+        html_var += "<tr>"
+        html_var += "<td>" + str(row[1]) + "</td>"
+        html_var += "<td>" + str(row[0]) + "</td>"
+        html_var += "</tr>"
+    html_var += "</table></body></html>"
+
+    return HttpResponse(html_var)
+
+def index(request):
+    pass
+    template = loader.get_template('index.html')
+
+    # rendering the template in HttpResponse
+    return HttpResponse(template.render())
+
+def college_details_template(request):
+    pass
+    template = loader.get_template('college-details.html')
+    details = college.objects.values_list("name", "acronym")
+    context = {
+        'college_list':details
+    }
+    return HttpResponse(template.render(context, request))
+
+def student_details_with_college_name(request):
+    pass
+    template = loader.get_template('student-list.html')
+    details = Student.objects.values('name','email','college__name')
+    context = {
+        'student_list': details
+    }
+    return HttpResponse(template.render(context, request))
+
+def student_individual_details(request,num):
+    pass
+    template = loader.get_template('student-list.html')
+    details = Student.objects.filter(id=int(num)).values('name', 'email', 'college__name')
+    context = {
+        'student_list': details
+    }
+    return HttpResponse(template.render(context, request))
+
+def student_total_with_button(request):
+    pass
+    template = loader.get_template('student-list-button.html')
+    details1 = Student.objects.values('id','name', 'email', 'college__name','mocktest1__total')
+    details2 = Student.objects.values('id')
+    context = {
+        'student_list': details1
+    }
+    return HttpResponse(template.render(context, request))
+
+def student_college_vise_details(request,clg):
+    pass
+    template = loader.get_template('student-list.html')
+    details = Student.objects.filter(college__acronym=str(clg)).values('name', 'email', 'college__name','mocktest1__total')
+    context = {
+        'student_list': details
+    }
+    return HttpResponse(template.render(context, request))
+
+count=0
+def counter(request):
+    pass
+    template = loader.get_template('counter.html')
+    global count
+    count += 1
+    context = {
+        'count_var' : count
+    }
+    return HttpResponse(template.render(context, request))
+
+def url_hit_count_with_session(request):
+    pass
+    request.session.setdefault("counter",0)
+    call_count = request.session['counter']+1
+    request.session['counter'] = call_count
+    return HttpResponse("You Have Visited {0} times".format(call_count))

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>College - Details</title>
+    <style>table, th, td { border: 1px solid black;border-collapse: collapse;}</style>
+</head>
+<body>
+<div >
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Acronym</th>
+        </tr>
+        {% for i in college_list %}
+        <tr>
+        {% for j in i %}
+            <td>
+                {{ j }}
+            </td>
+
+        {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student - List</title>
+    <style>table, th, td { border: 1px solid black;border-collapse: collapse;} a{color:chocolate}</style>
+</head>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Acronym</th>
+    </tr>
+    {% for i in college_details %}
+    <tr>
+        <td>{{i.id}}</td>
+        <td>{{i.acronym}}</td>
+        <td><a href="{{i.id}}">{{i.name}}</a></td>
+        {% if perms.onlineapp %}
+        <td><button><a href="{{i.id}}/editcollege">EDIT</a></button></button></td>
+        <td><button><a href="{{i.id}}/deletecollege">DELETE</a></button></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+    {% if perms.onlineapp %}
+    <button><a href="addcollege">ADD COLLEGE</a></button>
+    {% endif %}
+    <button><a href="/logout/">LOG OUT</a></button>
+</table>
+</body>
+</html>

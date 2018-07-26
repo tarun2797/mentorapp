@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AddCollege</title>
+</head>
+<body>
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Add Student</legend>
+        <div class="form-group">
+            <label for="{{form.name.id_for_label}}">
+                Name
+            </label>
+            {{form.name}}
+        </div>
+        <div class="form-group">
+            <label for="{{form.email.id_for_label}}">
+                Email
+            </label>
+            {{form.email}}
+        </div>
+        <div class="form-group">
+            <label for="{{form.db_folder.id_for_label}}">
+               DB_Folder
+            </label>
+            {{form.db_folder}}
+        </div>
+        <div class="form-group">
+            <label for="{{form.dropped_out.id_for_label}}">
+                Dropped_Out
+            </label>
+            {{form.dropped_out}}
+        </div>
+    </fieldset>
+</form>
+
+    <fieldset>
+        <legend>Add Marks</legend>
+        <div class="form-group">
+            <label for="{{form.problem1.id_for_label}}">
+                problem1
+            </label>
+            {{form.problem1}}
+        </div>
+        <div class="form-group">
+            <label for="{{form.problem2.id_for_label}}">
+                problem2
+            </label>
+            {{form.problem2}}
+        </div>
+        <div class="form-group">
+            <label for="{{form.problem3.id_for_label}}">
+               problem3
+            </label>
+            {{form.problem3}}
+        </div>
+        <div class="form-group">
+            <label for="{{form.problem4.id_for_label}}">
+                problem4
+            </label>
+            {{form.problem4}}
+        </div>
+    </fieldset>
+
+    <button type = submit>submit</button>
+{% endblock %}
+</body>
+</html>
